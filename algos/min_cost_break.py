@@ -11,7 +11,7 @@ def min_cost_break(homes: list[str], sorted_homes: list[str], cycle: list[str]) 
         return break_cycle_of_2(homes, sorted_homes, cycle)
 
     # cycle length > 2
-    # check all combinations (swaps), going through the cycle using for loops to check if cost 5 swap appears that break the loop
+    # check all combinations (swaps)
     else:
         for i in (range(len(cycle))):
            for j in (range(i, len(cycle))):
