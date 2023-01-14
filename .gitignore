@@ -1,0 +1,5 @@
+*.in
+*.out
+*.pyc
+__pycache__/
+*.vs*
