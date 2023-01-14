@@ -54,5 +54,11 @@ def run_all(infile: str, outfile: str) -> None:
     print(best_output)
 
 if __name__ == '__main__':
-
-    run_all(sys.argv[1], sys.argv[1].replace('.in', '.out').replace('input', 'output'))
+    import re
+    if len(sys.argv) > 1:
+        run_all(sys.argv[1], re.sub(r'^in|in$', 'out', sys.argv[1]))
+    else:
+        from pathlib import Path
+        for ifile in Path('inputs').glob('*3*.in'):
+            print(f'{ifile}:')
+            run_all(str(ifile), re.sub(r'^in|in$', 'out', str(ifile)))
