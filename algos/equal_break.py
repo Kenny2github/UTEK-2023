@@ -11,10 +11,13 @@ def equal_break(homes: list[str], sorted_homes: list[str], cycle: list[str]) -> 
     mid_in_home = homes.index(cycle[mid])
     right_in_home = homes.index(cycle[right])
 
+    # calculate swap costs and do the swap in both home and cycle
     cost = swap_cost(homes, sorted_homes, mid_in_home, right_in_home)
     homes[mid_in_home], homes[right_in_home] = homes[right_in_home], homes[mid_in_home]
     cycle[mid], cycle[right] = cycle[right], cycle[mid]
     print(f"Swap {homes[mid_in_home]} and {homes[right_in_home]}")
+
+    # call recursively and sum total costs
     return cost \
         + equal_break(homes, sorted_homes, cycle[:mid + 1]) \
         + equal_break(homes, sorted_homes, cycle[mid + 1:])
