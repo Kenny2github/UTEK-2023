@@ -16,7 +16,7 @@ def run_all(infile: str, outfile: str) -> None:
         selection_sort,
         haphazard_selection_sort,
         min_cost_break,
-        # five_cost_break,
+        five_cost_break,
         equal_break,
     ]
     _, _, original_homes = read_test_case(infile)
