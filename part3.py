@@ -54,6 +54,7 @@ def run_all(infile: str, outfile: str) -> None:
     print(f'Best strategy was {strategies[best_idx].__name__}; it cost {best_cost}')
     with open(outfile, 'w') as f:
         f.write(best_output)
+        print('Total cost is', best_cost, file=f)
     print(best_output)
 
 if __name__ == '__main__':
