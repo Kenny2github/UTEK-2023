@@ -1,7 +1,7 @@
 import sys
 import io
 from typing import Callable
-from contextlib import redirect_stdout
+from contextlib import redirect_stdout, redirect_stderr
 
 from cycles import make_cycles
 from utekio import read_test_case
@@ -32,15 +32,18 @@ def run_all(infile: str, outfile: str) -> None:
     for strategy in strategies:
         homes = original_homes[:]
         output = io.StringIO()
-        with redirect_stdout(output):
+        with redirect_stdout(output), redirect_stderr(output):
             # run the strategy on every cycle
-            cost = sum(strategy(homes, sorted_homes, cycle)
-                       for cycle in cycles)
-        if homes == sorted_homes:
-            results.append((base_cost + cost,
-                            base_output.getvalue() + output.getvalue()))
-        else:
+            try:
+                cost = sum(strategy(homes, sorted_homes, cycle)
+                           for cycle in cycles)
+            except Exception:
+                cost = 1 << 64  # massive cost on bug
+        if homes != sorted_homes:
             print(f'WARNING: {strategy.__name__} is incorrect!', homes)
+            cost = 1 << 64
+        results.append((base_cost + cost,
+                        base_output.getvalue() + output.getvalue()))
 
     for (cost, output), strategy in zip(results, strategies):
         print(f'{strategy.__name__}: {cost}')
