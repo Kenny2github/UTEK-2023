@@ -31,9 +31,9 @@ def selection_sort() -> list[str]:
 if __name__ == '__main__':
     test_cases = ['2a', '2b', '2c']
     for test in test_cases:
-        num_kingdom, num_rank, homes = read_input(test + ".in")
+        num_kingdom, num_rank, homes = read_input(f'inputs/{test}.in')
 
         sorted_homes = sorted(homes)
         swaps = selection_sort()
 
-        write_output(swaps, test + '.out')
+        write_output(swaps, f'outputs/{test}.out')

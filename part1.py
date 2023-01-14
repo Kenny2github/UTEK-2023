@@ -1,6 +1,3 @@
-import sys
-from itertools import product
-
 def read_input(filename: str) -> tuple[int, int, list[str]]:
     with open(filename) as f:
         num_kingdom = int(f.readline())
@@ -31,9 +28,9 @@ def selection_sort() -> list[str]:
 if __name__ == '__main__':
     test_cases = ['1a', '1b', '1c']
     for test in test_cases:
-        num_kingdom, num_rank, homes = read_input(test + '.in')
+        num_kingdom, num_rank, homes = read_input(f'inputs/{test}.in')
 
         sorted_homes = sorted(homes)
         swaps = selection_sort()
 
-        write_output(swaps, test + '.out')
+        write_output(swaps, f'outputs/{test}.out')
